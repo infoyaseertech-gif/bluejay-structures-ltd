@@ -24,6 +24,7 @@
 
   /* Type */
   --font-display: "Space Grotesk", "Arial Narrow", sans-serif;
+  --font-serif: "Fraunces", Georgia, "Times New Roman", serif;
   --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: "IBM Plex Mono", "Courier New", monospace;
 
@@ -49,6 +50,22 @@ body {
   line-height: 1.6;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  position: relative;
+}
+
+/* Subtle film-grain texture over the whole page for a tactile, printed feel */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size: 180px 180px;
 }
 
 img { max-width: 100%; display: block; }
@@ -71,9 +88,24 @@ h1, h2, h3, h4 {
   color: var(--ink);
 }
 
-h1 { font-size: clamp(2.4rem, 5vw, 4.2rem); }
-h2 { font-size: clamp(1.8rem, 3.4vw, 2.6rem); }
+h1, h2 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.08;
+}
+
+h1 { font-size: clamp(2.6rem, 5.4vw, 4.5rem); }
+h2 { font-size: clamp(1.9rem, 3.6vw, 2.75rem); }
 h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
+
+em, .accent-serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+}
+
+p { line-height: 1.65; }
 
 .eyebrow {
   font-family: var(--font-mono);
@@ -96,6 +128,7 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
   font-size: clamp(1.02rem, 1.6vw, 1.2rem);
   color: var(--steel);
   max-width: 60ch;
+  line-height: 1.7;
 }
 
 .section-head { margin-bottom: 44px; }
@@ -271,7 +304,12 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
 /* ---------- Hero ---------- */
 .hero {
   position: relative;
-  background: var(--ink);
+  background-color: var(--ink);
+  background-image:
+    radial-gradient(ellipse 900px 560px at 10% -10%, rgba(26,163,232,0.32), transparent 60%),
+    radial-gradient(ellipse 750px 520px at 105% 5%, rgba(13,110,168,0.38), transparent 55%),
+    radial-gradient(ellipse 900px 560px at 50% 125%, rgba(26,163,232,0.16), transparent 60%);
+  background-repeat: no-repeat;
   color: var(--white);
   overflow: hidden;
   padding: 90px 0 0;
@@ -300,7 +338,7 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
 .hero-copy .eyebrow { color: #7fb2dd; }
 .hero-copy .eyebrow::before { background: var(--rust); }
 .hero h1 { color: var(--white); margin-top: 14px; }
-.hero h1 .accent { color: var(--rust); }
+.hero h1 .accent { color: var(--rust); font-style: italic; font-weight: 500; }
 .hero-copy .lede { color: rgba(255,255,255,0.72); margin-top: 18px; }
 .hero-cta { display: flex; gap: 14px; margin-top: 34px; flex-wrap: wrap; }
 
@@ -354,9 +392,15 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
 }
 
 /* ---------- Section shells ---------- */
-section { padding: 92px 0; }
+section { padding: 96px 0; }
+.bg-concrete {
+  background-color: var(--concrete);
+  background-image:
+    linear-gradient(rgba(10,37,64,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(10,37,64,0.035) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
 .section-tight { padding: 64px 0; }
-.bg-concrete { background: var(--concrete); }
 .bg-ink { background: var(--ink); color: var(--white); }
 .bg-ink .steel-text { color: rgba(255,255,255,0.65); }
 .bg-blueprint { background: var(--blueprint-dark); color: var(--white); }
@@ -568,7 +612,13 @@ section { padding: 92px 0; }
 
 /* CTA banner */
 .cta-banner {
-  background: var(--blueprint-dark);
+  position: relative;
+  overflow: hidden;
+  background-color: var(--blueprint-dark);
+  background-image:
+    radial-gradient(ellipse 500px 300px at 100% -20%, rgba(26,163,232,0.35), transparent 60%),
+    radial-gradient(ellipse 450px 280px at 0% 120%, rgba(26,163,232,0.18), transparent 55%);
+  background-repeat: no-repeat;
   color: var(--white);
   border-radius: var(--radius);
   padding: 50px var(--gutter);
@@ -582,7 +632,15 @@ section { padding: 92px 0; }
 .cta-banner p { color: rgba(255,255,255,0.7); margin-top: 8px; }
 
 /* Footer */
-.site-footer { background: var(--ink); color: rgba(255,255,255,0.7); padding: 70px 0 30px; }
+.site-footer {
+  background-color: var(--ink);
+  background-image:
+    radial-gradient(ellipse 700px 420px at 90% -10%, rgba(26,163,232,0.18), transparent 60%),
+    radial-gradient(ellipse 600px 400px at 0% 100%, rgba(13,110,168,0.20), transparent 55%);
+  background-repeat: no-repeat;
+  color: rgba(255,255,255,0.7);
+  padding: 70px 0 30px;
+}
 .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 50px; border-bottom: 1px solid rgba(255,255,255,0.1); }
 @media (max-width: 800px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 500px) { .footer-grid { grid-template-columns: 1fr; } }
@@ -598,7 +656,17 @@ section { padding: 92px 0; }
 .reveal.in { opacity: 1; transform: translateY(0); }
 
 /* Breadcrumb / page header for interior pages */
-.page-header { background: var(--ink); color: var(--white); padding: 64px 0 48px; position: relative; overflow: hidden; }
+.page-header {
+  background-color: var(--ink);
+  background-image:
+    radial-gradient(ellipse 800px 480px at 8% -20%, rgba(26,163,232,0.30), transparent 60%),
+    radial-gradient(ellipse 650px 460px at 100% 40%, rgba(13,110,168,0.32), transparent 55%);
+  background-repeat: no-repeat;
+  color: var(--white);
+  padding: 64px 0 48px;
+  position: relative;
+  overflow: hidden;
+}
 .page-header .eyebrow { color: #7fb2dd; }
 .page-header h1 { color: var(--white); margin-top: 12px; font-size: clamp(2rem, 4vw, 2.8rem); }
 .page-header p { color: rgba(255,255,255,0.68); margin-top: 14px; max-width: 62ch; }
@@ -662,3 +730,45 @@ section { padding: 92px 0; }
   padding: 10px 16px; z-index: 200;
 }
 .skip-link:focus { left: 10px; top: 10px; }
+
+/* ---------- Floating WhatsApp button ---------- */
+.whatsapp-float {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #25d366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 24px -8px rgba(10, 37, 64, 0.45), 0 2px 8px rgba(10, 37, 64, 0.25);
+  z-index: 95;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.whatsapp-float:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 14px 28px -8px rgba(10, 37, 64, 0.5), 0 3px 10px rgba(10, 37, 64, 0.3);
+}
+.whatsapp-float svg { width: 30px; height: 30px; }
+.whatsapp-float .wa-pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #25d366;
+  opacity: 0.55;
+  animation: wa-pulse 2.2s ease-out infinite;
+  z-index: -1;
+}
+@keyframes wa-pulse {
+  0% { transform: scale(1); opacity: 0.5; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+@media (max-width: 600px) {
+  .whatsapp-float { right: 16px; bottom: 16px; width: 52px; height: 52px; }
+  .whatsapp-float svg { width: 26px; height: 26px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp-float .wa-pulse { animation: none; display: none; }
+}
