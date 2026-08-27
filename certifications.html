@@ -571,6 +571,79 @@ section { padding: 96px 0; }
   object-fit: cover;
   display: block;
 }
+
+/* ---------- CEO / leadership spotlight ---------- */
+.ceo-feature {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--ink);
+  background-image:
+    radial-gradient(ellipse 700px 460px at 92% -15%, rgba(26,163,232,0.32), transparent 60%),
+    radial-gradient(ellipse 600px 420px at 4% 115%, rgba(13,110,168,0.30), transparent 55%);
+  background-repeat: no-repeat;
+  color: var(--white);
+  border-radius: var(--radius);
+  padding: 56px;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 52px;
+  align-items: center;
+}
+.ceo-photo-wrap {
+  position: relative;
+  padding: 14px;
+  flex-shrink: 0;
+}
+.ceo-photo-wrap .corner {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border-color: var(--rust);
+  border-style: solid;
+  border-width: 0;
+}
+.ceo-photo-wrap .corner.tl { top: 0; left: 0; border-top-width: 3px; border-left-width: 3px; }
+.ceo-photo-wrap .corner.tr { top: 0; right: 0; border-top-width: 3px; border-right-width: 3px; }
+.ceo-photo-wrap .corner.bl { bottom: 0; left: 0; border-bottom-width: 3px; border-left-width: 3px; }
+.ceo-photo-wrap .corner.br { bottom: 0; right: 0; border-bottom-width: 3px; border-right-width: 3px; }
+.ceo-photo {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  display: block;
+  border: 1px solid rgba(255,255,255,0.14);
+}
+.ceo-role {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--rust);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 14px 0 18px;
+}
+.ceo-content h2 {
+  color: var(--white);
+  font-size: clamp(2rem, 3.6vw, 3rem);
+}
+.ceo-content .lede { color: rgba(255,255,255,0.78); }
+.ceo-quote {
+  margin-top: 24px;
+  padding-left: 20px;
+  border-left: 2px solid var(--rust);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: rgba(255,255,255,0.88);
+  max-width: 55ch;
+}
+@media (max-width: 720px) {
+  .ceo-feature {
+    grid-template-columns: 1fr;
+    padding: 32px;
+    gap: 28px;
+  }
+  .ceo-photo-wrap { max-width: 240px; margin: 0 auto; }
+}
 .team-card h3 { font-size: 1.05rem; }
 .team-role { font-family: var(--font-mono); font-size: 0.72rem; color: var(--rust-dark); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 4px; }
 .team-qual { color: var(--steel); font-size: 0.88rem; margin-top: 8px; }
